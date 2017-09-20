@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试thunk</title>
+</head>
+<body>
+<div></div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+	(function () {
+		var url = 'https://api.github.com/users/github';
+		// 正常版本的Ajax（多参数版本）
+		/*$.get(url,function (data) {
+			console.log(data);
+		});*/
+		
+		// Thunk版本的Ajax(单参数版本)
+		/*var sendApply = Thunk(url);
+		sendApply(function (data) {
+			console.log(data);
+			$('div').html(JSON.stringify(data));
+		});
+		
+		function Thunk(url){
+			return function (callback){
+				return $.get(url,function (data) {
+					callback(data);
+				});
+			};
+		};*/
+		
+		var ThunkSimple = function(fn){
+			return function (){
+				var args = Array.prototype.slice.call(arguments);
+				return function (callback){
+					args.push(callback);
+					return fn.apply(this, args);
+				}
+			};
+		};
+		var sendApply = ThunkSimple($.ajax);
+		sendApply(url)(function (data) {
+			debugger;
+			console.log(data);
+		});
+		sendApply(url)().success(function (data) {
+			console.log(data);
+			$('div').html(JSON.stringify(data));
+		})
+	})();
+</script>
+</body>
+</html>
