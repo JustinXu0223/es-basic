@@ -8,6 +8,7 @@ function* f(i) {
 }
  for(let v of f(1)){
   console.log(v);
+
  }
 // const g = f(1);
 // console.log(g.next());
