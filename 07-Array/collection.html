@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>123</p>
+<script>
+    var elem = document.getElementsByTagName('p'); // HTMLCollection
+    Array.from(elem).forEach(function(value,index){
+        console.log(value.nodeName); // P
+    })
+</script>
+</body>
+</html>
