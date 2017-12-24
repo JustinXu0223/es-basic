@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>align-items</title>
+</head>
+<style>
+	div{
+		display: flex;
+		border: 1px solid #000;
+		height: 250px;
+		align-items: flex-start;
+	}
+	p{
+		border: 1px solid red;
+		width: 80px;
+		text-align: center;
+		margin-left: 20px;
+	}
+	p:nth-child(1){
+		height: 80px;
+	}
+	p:nth-child(2){
+		height: 160px;
+	}
+	p:nth-child(3){
+		height: 50px;
+	}
+	p:nth-child(4){
+		height: 100px;
+	}
+</style>
+<body>
+<div>
+	<p>1</p>
+	<p>2</p>
+	<p>3</p>
+	<p>4</p>
+</div>
+</body>
+</html>

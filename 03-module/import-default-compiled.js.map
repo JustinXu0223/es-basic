@@ -1,0 +1,1 @@
+{"version":3,"sources":["import-default.js"],"names":[],"mappings":";;AAAA;;;;;;AAEA","file":"import-default-compiled.js","sourcesContent":["import foo from './export-default';\r\n\r\nfoo();"]}

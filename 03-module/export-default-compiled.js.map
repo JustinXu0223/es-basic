@@ -1,0 +1,1 @@
+{"version":3,"sources":["export-default.js"],"names":[],"mappings":";;;;;;AACA,IAAM,MAAM,SAAN,GAAM;AAAA,SAAQ,QAAQ,GAAR,CAAY,IAAZ,CAAR;AAAA,CAAZ;;kBAEe,G","file":"export-default-compiled.js","sourcesContent":["\r\nconst foo = text => console.log(text);\r\n\r\nexport default foo;"]}

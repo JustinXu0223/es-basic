@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试</title>
+</head>
+<style>
+	.outer{
+		border: 1px solid red;
+		width: 500px;
+		position: absolute;
+		left: 50%;/*先平移50%*/
+		top: 50%;
+		/*平移回来元素宽高的一半*/
+		transform: translate(-50%,-50%);
+	}
+	.inner{
+		height: 200px;
+	}
+</style>
+<body>
+<div class="outer">
+	<div class="inner"></div>
+</div>
+</body>
+</html>

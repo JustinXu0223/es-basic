@@ -1,0 +1,1 @@
+{"version":3,"sources":["7-use-1.js"],"names":[],"mappings":";;AAKC,C,GAAO,IAAE,C,EALV;;;;;AAKG,C,GAAS,IAAE,C;;AACd,QAAQ,GAAR,CAAY,CAAZ,E,CAAgB;AAChB,QAAQ,GAAR,CAAY,CAAZ,E,CAAgB","file":"7-use-1-compiled.js","sourcesContent":["/**\r\n * 用途\r\n * 1. 交换变量值。\r\n */\r\n\r\n[y,x]= [x=1,y=2];\r\nconsole.log(x); //2\r\nconsole.log(y); //1\r\n"]}
