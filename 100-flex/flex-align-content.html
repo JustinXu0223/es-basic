@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>align-items</title>
+	<title>align-content</title>
 </head>
 <style>
 	div{
 		display: flex;
 		border: 1px solid #000;
 		height: 250px;
-		align-items: stretch;
+		align-items: flex-start;
+		flex-wrap: wrap;
+		align-content: space-around;
 	}
 	p{
 		border: 1px solid red;
@@ -24,6 +26,12 @@
 	<p>2</p>
 	<p>3</p>
 	<p>4</p>
+	<p>5</p>
+	<p>6</p>
+	<p>7</p>
+	<p>8</p>
+	<p>9</p>
+	<p>10</p>
 </div>
 </body>
 </html>
