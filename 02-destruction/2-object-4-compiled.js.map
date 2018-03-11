@@ -1,1 +1,0 @@
-{"version":3,"sources":["2-object-4.js"],"names":[],"mappings":";;AAAA;;;AAGA,IAAI,UAAJ;SACO,EAAC,GAAG,CAAJ,E;AAAL,C,MAAA,C;;;AAEF,QAAQ,GAAR,CAAY,CAAZ,E,CAAgB","file":"2-object-4-compiled.js","sourcesContent":["/**\r\n * 对象解构.\r\n */\r\nlet x;\r\n({x} = {x: 1});\r\n\r\nconsole.log(x); // 1"]}
