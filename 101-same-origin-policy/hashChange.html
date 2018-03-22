@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>first</title>
+</head>
+<body>
+<button>按钮1</button>
+<button>按钮2</button>
+<script>
+    var btn1 = document.body.children[0];
+    btn1.onclick = function () {
+        location.hash = 'first';
+    }
+    var btn2 = document.body.children[1];
+    btn2.onclick = function () {
+        location.hash = 'second';
+    }
+    window.onhashchange = function (e) {
+        console.log(location.hash);
+    }
+</script>
+</body>
+</html>
