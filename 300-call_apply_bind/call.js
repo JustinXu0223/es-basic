@@ -11,7 +11,7 @@ function add(c, d) {
 
 const obj = { a: 1, b: 2 };
 
-// console.error(add.call(obj, 3, 4));
+// console.error(add.call(obj, 3, 4)); // 10
 // add.call(o, 5, 7)使add函数中的this指向o对象，
 // 并且执行了add函数。依据上例把o对象改造成如下：
 
@@ -46,25 +46,27 @@ Function.prototype.es3Call = function (context) {
   // console.log(JSON.stringify(arr));
   var args = [];
   for (var i = 1, len = arguments.length ; i < len; i++) {
-    args.push(arguments[i]);
+    args.push('arguments[' + i + ']');
   }
   var result = eval('content.fn('+args+')');
   delete content.fn;
   return result;
 }
 
-console.error(add.es3Call(obj, 3, 4));
+// console.error(add.es3Call(obj, 3, 4));
+// console.log(add.es3Call({ a: 3, b: 9 }, {xx: 1}, 4)); // 12[object Object]4
 
-// ES5 call 实现
+// ES6 call 实现
 Function.prototype.es6Call = function (context) {
   var context = context || window;
   context.fn = this;
   var args = [];
   for (var i = 1, len = arguments.length; i < len; i++) {
-    args.push(arguments[i]);
+    args.push('arguments[' + i + ']');
   }
   const result = context.fn(...args);
   return result;
 }
 
-console.log(add.es6Call(obj, 3, 4));
+console.error(add.es6Call(obj, 3, 4));
+console.log(add.es3Call({ a: 3, b: 9 }, {xx: 1}, 4)); // 12[object Object]4
