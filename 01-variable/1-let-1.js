@@ -203,6 +203,9 @@ if(str.indexOf('=')>0)
   str=str.substring(0, equalIndex);
 
 }
+// test master
+console.log(b); // ReferenceError: b is not defined
+
 var strLength=str.length;
 var fileLength=parseInt(strLength-(strLength/8)*2);
 console.log(fileLength);
