@@ -18,14 +18,20 @@ Function.prototype.es3Apply = function (context, arr) {
   if (!arr) {
     result = context.fn();
   } else {
-    if (!(arr instanceof Array)) throw new Error('params must be array');
-    result = eval('context.fn('+arr+')');
+    // 获取参数
+    var args = [];
+    for (var i = 0, len = arr.length; i < len; i++) {
+      args.push('arr[' + i + ']');
+    }
+    // 执行函数
+    result = eval('context.fn(' + args + ')')
   }
   delete context.fn;
   return result
 }
 
-console.log(add.apply(obj, [1, 2]));
+console.log(add.es3Apply(obj, [1, 'abc', '2'])); // 4abc
+// console.log(add.apply(obj, [1, 2]));
 
 
 Function.prototype.es6Apply = function (context, arr) {
