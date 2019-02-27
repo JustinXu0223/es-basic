@@ -22,14 +22,13 @@
 <script src="./hashRouter.js"></script>
 <script>
   const router = new Router();
-  router.init();
-  router.route('/', function () {
+  router.push('/', function () {
     document.getElementById('content').innerHTML = 'Home';
   });
-  router.route('/about', function () {
+  router.push('/about', function () {
     document.getElementById('content').innerHTML = 'About';
   });
-  router.route('/topics', function () {
+  router.push('/topics', function () {
     document.getElementById('content').innerHTML = 'Topics';
   });
 </script>

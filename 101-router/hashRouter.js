@@ -2,16 +2,21 @@ class Router {
   constructor() {
     this.routes = {};
     this.currentUrl = '';
+    this.initListener();
   }
-  route(path, callback) {
+  push(path, callback) {
     this.routes[path] = callback || function() {};
   }
   updateView() {
     this.currentUrl = location.hash.slice(1) || '/';
     this.routes[this.currentUrl] && this.routes[this.currentUrl]();
   }
-  init() {
+  initListener() {
     window.addEventListener('load', this.updateView.bind(this), false);
     window.addEventListener('hashchange', this.updateView.bind(this), false);
+  }
+  removeListener() {
+    window.removeEventListener('load', function () {}, false);
+    window.removeEventListener('hashchange', function () {}, false);
   }
 }

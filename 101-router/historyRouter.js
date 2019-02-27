@@ -2,8 +2,9 @@ class Router {
   constructor() {
     this.routes = {};
     this.currentUrl = '';
+    this.initListener();
   }
-  route(path, callback) {
+  push(path, callback) {
     this.routes[path] = callback || function() {};
   }
   updateView(url) {
@@ -26,11 +27,15 @@ class Router {
       );
     }
   }
-  init() {
+  initListener() {
     this.bindLink();
     window.addEventListener('popstate', e => {
       this.updateView(window.location.pathname);
     });
     window.addEventListener('load', () => this.updateView('/'), false);
+  }
+  removeListener() {
+    window.removeEventListener('load', function () {}, false);
+    window.removeEventListener('hashchange', function () {}, false);
   }
 }
