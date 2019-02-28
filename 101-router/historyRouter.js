@@ -3,6 +3,7 @@ class Router {
     this.routes = {};
     this.currentUrl = '';
     this.initListener();
+    this.initBindLink();
   }
   push(path, callback) {
     this.routes[path] = callback || function() {};
@@ -11,7 +12,7 @@ class Router {
     this.currentUrl = url;
     this.routes[this.currentUrl] && this.routes[this.currentUrl]();
   }
-  bindLink() {
+  initBindLink() {
     const allLink = document.querySelectorAll('a[data-href]');
     for (let i = 0, len = allLink.length; i < len; i++) {
       const current = allLink[i];
@@ -28,10 +29,7 @@ class Router {
     }
   }
   initListener() {
-    this.bindLink();
-    window.addEventListener('popstate', e => {
-      this.updateView(window.location.pathname);
-    });
+    window.addEventListener('popstate', () => this.updateView(window.location.pathname));
     window.addEventListener('load', () => this.updateView('/'), false);
   }
   removeListener() {
