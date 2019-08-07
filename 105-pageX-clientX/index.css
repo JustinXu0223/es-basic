@@ -1,0 +1,14 @@
+html,
+body {
+  margin: 0;
+}
+
+.content-view {
+  width: 800px;
+  height: 800px;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

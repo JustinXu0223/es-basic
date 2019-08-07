@@ -12,12 +12,12 @@ PS：防抖和节流的作用都是防止函数多次调用。区别在于，假
 
 function simpleDebounce(func, wait = 50) {
   let timer = 0;
-  return function(...args) {
+  return function (...args) {
     if (timer) clearTimeout(timer);
     timer = setTimeout(() => {
       func.apply(this, args);
     }, wait);
-  }
+  };
 }
 
 /**
@@ -41,7 +41,8 @@ function simpleDebounce(func, wait = 50) {
  * @return {function}             返回客户调用函数
  */
 function debounce(func, wait = 50, immediate) {
-  let timer, context, args;
+  let timer; let context; let
+    args;
 
   // 延迟执行函数
   const later = () => setTimeout(() => {
@@ -51,7 +52,7 @@ function debounce(func, wait = 50, immediate) {
     // 使用到之前缓存的参数和上下文
     if (!immediate) {
       func.apply(context, args);
-      context = args = null
+      context = args = null;
     }
   }, wait);
 
@@ -74,10 +75,10 @@ function debounce(func, wait = 50, immediate) {
     // 这样做延迟函数会重新计时
     clearTimeout(timer);
     timer = later();
-  }
+  };
 }
 
-/***
+/** *
  * 对于按钮防点击来说的实现：如果函数是立即执行的，就立即调用，如果函数是延迟执行的，
  * 就缓存上下文和参数，放到延迟函数中去执行。一旦我开始一个定时器，
  * 只要我定时器还在，你每次点击我都重新计时。一旦你点累了，定时器时间到，定时器重置为 null，就可以再次点击了。
