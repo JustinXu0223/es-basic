@@ -48,7 +48,8 @@ class Tabs extends React.Component {
           React.Children.map(children, (childElem, index) => {
             if (!(childElem.type && activeIndex === index)) return null;
             return React.cloneElement(childElem, {
-              active: activeIndex === index,
+              activeIndex,
+              index,
             });
           })
         }

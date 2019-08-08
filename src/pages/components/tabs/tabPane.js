@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TabPane = ({ active, children }) => (
+const TabPane = ({ children }) => (
   <div
     style={{
       width: '100%',
       minHeight: 400,
-      border: active ? '1px #fff solid' : '0px',
+      border: '1px #fff solid',
     }}
   >
     {children}
@@ -14,12 +14,14 @@ const TabPane = ({ active, children }) => (
 );
 
 TabPane.defaultProps = {
-  active: false,
+  // activeIndex: 0,
+  // index: 0,
   children: '',
 };
 
 TabPane.propTypes = {
-  active: PropTypes.bool,
+  // activeIndex: PropTypes.number,
+  // index: PropTypes.number,
   children: PropTypes.node,
 };
 
