@@ -12,33 +12,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import JudgeWoman from './judgeWoman';
+import JudgeWoman from '../components/hoc/hocGender';
 
-const Demo = ({ add }) => (
+const List = ({ add }) => (
   <div>
-    <div>女士列表页</div>
-    <div>{add}</div>
+    <span>女士列表页: </span>
+    <span>{add}</span>
   </div>
 );
 
-Demo.defaultProps = {
+List.defaultProps = {
   add: '',
 };
 
-Demo.propTypes = {
+List.propTypes = {
   add: PropTypes.string,
 };
 
-export const WithList = JudgeWoman(Demo);
-
+export const WithList = JudgeWoman(List);
 
 const ShoppingCart = ({ add }) => (
   <div>
-    <div>女士购物页</div>
-    <div>{add}</div>
+    <span>女士购物页: </span>
+    <span>{add}</span>
   </div>
 );
-
 
 ShoppingCart.defaultProps = {
   add: '',
