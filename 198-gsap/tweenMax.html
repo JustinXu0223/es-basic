@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      #box {
+        width: 200px;
+        height: 200px;
+        border: 1px solid red;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    </style>
+</head>
+<body>
+
+<div id="box">内容</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+<script>
+  window.onload = function () {
+    TweenMax.to('#box', 2, { left: 400, top: 400 });
+    TweenMax.to('#box', 1, { width: 400, height: 400 });
+  }
+</script>
+</body>
+</html>
