@@ -62,10 +62,13 @@ function compareProps(key) {
 function treeToArray(list, newArr = []) {
   list.forEach((item) => {
     const { children } = item;
-    delete item.children;
-    if (children && children.length) {
-      newArr.push(item);
-      return treeToArray(children, newArr);
+    if (children) {
+      delete item.children;
+
+      if (children.length) {
+        newArr.push(item);
+        return treeToArray(children, newArr);
+      }
     }
     newArr.push(item);
   });
@@ -111,10 +114,10 @@ function getTreePathList(list, value, {
   }
 }
 
-// console.log(getTreePathList(data, 14, {
-//   equalKey: 'id',
-//   returnOnlyLast: true,
-// }));
+console.log(getTreePathList(data, 11, {
+  equalKey: 'id',
+  returnIndex: true,
+}));
 
 // 迭代器
 function iterator(arr, cb, isFirst = true) {
@@ -162,4 +165,4 @@ function changeTreeKey(list, isFirst = true) {
   });
 }
 
-console.log(changeTreeKey(data));
+// console.log(changeTreeKey(data));
