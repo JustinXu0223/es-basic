@@ -8,8 +8,9 @@ import CryptoJS from 'crypto-js';
 // INIT
 const APP_KEY = '1p72smk2xwou7dytya';
 
-const APP_SECRET = 'mdeldqauyg4tj39z';
-const APP_SECRET_KEY = CryptoJS.enc.Utf8.parse(APP_SECRET);
+const APP_SECRET = 'mdeldqauyg4tj39z5yirardcvgyq8i4l';
+console.log(APP_SECRET.slice(0, 16));
+const APP_SECRET_KEY = CryptoJS.enc.Utf8.parse(APP_SECRET.slice(0, 16));
 
 const letterList = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'.split('');
 
@@ -54,7 +55,7 @@ export function encode(iv) {
   return {
     ...map,
     sign: CryptoJS.HmacSHA256(CryptoJS.SHA256(stringSignTemp), APP_SECRET_KEY).toString(),
-    data: encodeURIComponent(aesRes.toString()),
+    data: aesRes.toString(),
   };
 }
 
@@ -73,6 +74,7 @@ const result = encode(header['X-PEIV']);
 
 export function print() {
   console.log('@header:', header);
-  console.log('@result:', result);
+  console.log('@header:', header);
+  console.log('@result:', result.data);
   console.log('@decode:', decode(result.data, header['X-PEIV']));
 }
