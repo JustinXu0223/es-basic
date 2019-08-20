@@ -6,10 +6,11 @@
  */
 import CryptoJS from 'crypto-js';
 // INIT
-const APP_KEY = '0p72smk2xwou7dytya';
+const APP_KEY = '1p72smk2xwou7dytya';
 
-const APP_SECRET = 'mdeldqauyg4tj39z';
-const APP_SECRET_KEY = CryptoJS.enc.Utf8.parse(APP_SECRET);
+const APP_SECRET = 'mdeldqauyg4tj39z5yirardcvgyq8i4l';
+console.log(APP_SECRET.slice(0, 16));
+const APP_SECRET_KEY = CryptoJS.enc.Utf8.parse(APP_SECRET.slice(0, 16));
 
 const letterList = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'.split('');
 
@@ -22,7 +23,8 @@ function getRandom(num = 11) {
 }
 
 function getSecretHeader() {
-  return { 'X-YB-APPKEY': APP_KEY, 'X-YB-PEIV': getRandom(16) };
+  return { 'X-APPKEY': APP_KEY, 'X-PEIV': getRandom(16) };
+  // return { 'X-APPKEY': APP_KEY, 'X-PEIV': '0oDHJfm6kvqt4Pcf' };
 }
 
 function getSecretMap() {
@@ -30,6 +32,7 @@ function getSecretMap() {
     appKey: APP_KEY,
     nonce_str: getRandom(11),
     timestamp: parseInt(String(+new Date() / 1000), 10),
+    // timestamp: 1566207709.111111,
   };
   const result = Object.keys(map).sort().reduce((prev, curr) => {
     prev[curr] = map[curr];
@@ -57,7 +60,7 @@ export function encode(iv) {
 }
 
 export function decode(word, iv) {
-  const decrypt = CryptoJS.AES.decrypt(word, APP_SECRET_KEY, {
+  const decrypt = CryptoJS.AES.decrypt(decodeURIComponent(word), APP_SECRET_KEY, {
     iv: CryptoJS.enc.Utf8.parse(iv),
     mode: CryptoJS.mode.CBC,
     padding: CryptoJS.pad.Pkcs7,
@@ -67,9 +70,11 @@ export function decode(word, iv) {
 }
 
 const header = getSecretHeader();
-const result = encode(header['X-YB-PEIV']);
+const result = encode(header['X-PEIV']);
 
 export function print() {
+  console.log('@header:', header);
+  console.log('@header:', header);
   console.log('@result:', result.data);
-  console.log(decode(result.data, header['X-YB-PEIV']));
+  console.log('@decode:', decode(result.data, header['X-PEIV']));
 }
