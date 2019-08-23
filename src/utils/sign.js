@@ -42,8 +42,8 @@ function getSecretMap() {
     appKey: APP_KEY,
     nonce_str: getRandom(11),
     timestamp: parseInt(String(+new Date() / 1000), 10),
-    // nonce_str: 'FMSDz5AD7Ra',
-    // timestamp: 1566553818,
+    // nonce_str: 'FvK5uGviJYA',
+    // timestamp: 1566556700,
   };
   const result = Object.keys(map).sort().reduce((prev, curr) => {
     prev[curr] = map[curr];
@@ -56,8 +56,7 @@ function getSecretMap() {
   };
 }
 
-export function encodeData(iv) {
-  const { stringDataTemp } = getSecretMap();
+export function encodeData(stringDataTemp, iv) {
   const aesRes = CryptoJS.AES.encrypt(stringDataTemp, APP_DATA_SECRET_KEY, {
     iv: CryptoJS.enc.Utf8.parse(iv),
     mode: CryptoJS.mode.CBC,
@@ -66,18 +65,17 @@ export function encodeData(iv) {
   return aesRes.toString();
 }
 
-export function encodeSign() {
-  const { stringSignTemp } = getSecretMap();
+export function encodeSign(stringSignTemp) {
   console.log('@stringSignTemp:', stringSignTemp);
   return CryptoJS.HmacSHA256(stringSignTemp, APP_SIGN_SECRET_KEY).toString().toUpperCase();
 }
 
 export function encode(iv) {
-  const { map } = getSecretMap();
+  const { map, stringDataTemp, stringSignTemp } = getSecretMap();
   return {
     ...map,
-    sign: encodeSign(),
-    data: encodeData(iv),
+    sign: encodeSign(stringSignTemp),
+    data: encodeData(stringDataTemp, iv),
   };
 }
 
