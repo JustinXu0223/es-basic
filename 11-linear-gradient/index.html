@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>渐变和过渡效果</title>
+  <style>
+    .box {
+      margin: 250px auto 0;
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(to left, #999, #e4393c);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .inner {
+      position: absolute;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(to right, #999, #e4393c);
+      opacity: 0;
+      transition: opacity linear .33s;
+    }
+
+    .box:hover .inner {
+      opacity: 1;
+    }
+  </style>
+  <!-- 两个设置了渐变色的元素层叠后，通过过渡一个透明度的0到1的元素来实现渐变色渐入渐出 -->
+</head>
+<body>
+  <div class="box">
+    <div class="inner"></div>
+  </div>
+</body>
+</html>

@@ -80,7 +80,7 @@ export function encode(iv) {
 }
 
 export function decodeData(word, iv) {
-  const decrypt = CryptoJS.AES.decrypt(decodeURIComponent(word), APP_DATA_SECRET_KEY, {
+  const decrypt = CryptoJS.AES.decrypt(word, APP_DATA_SECRET_KEY, {
     iv: CryptoJS.enc.Utf8.parse(iv),
     mode: CryptoJS.mode.CBC,
     padding: CryptoJS.pad.Pkcs7,
