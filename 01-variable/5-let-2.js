@@ -1,5 +1,5 @@
-var s = 'hello';
+const s = 'hello';
 for (var i = 0; i < s.length; i++) {
-    console.log(s[i]);
+  console.log(s[i]);
 }
 console.log(i); // 5

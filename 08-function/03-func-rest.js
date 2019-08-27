@@ -1,5 +1,5 @@
 
-var arr = [14, 3, 77];
+const arr = [14, 3, 77];
 
 // ES5的写法
 console.log(Math.max.apply(null, arr)); // 77

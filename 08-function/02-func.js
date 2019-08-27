@@ -1,19 +1,19 @@
 const x = 1;
 const f = (x, y = x) => {
-    console.log(y);
+  console.log(y);
 };
 
 f(2); // 2
 
-const func = (y = x) =>{
-    let x = 2;
-    console.log(y);
+const func = (y = x) => {
+  let x = 2;
+  console.log(y);
 };
-func(); //1
+func(); // 1
 
-let foo = 'outer';
+const foo = 'outer';
 function bar(func = x => foo) {
-    let foo = 'inner';
-    console.log(func()); // outer
+  let foo = 'inner';
+  console.log(func()); // outer
 }
 bar();

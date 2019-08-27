@@ -4,7 +4,7 @@
  * */
 
 function now() {
-  return +new Date()
+  return +new Date();
 }
 
 /**
@@ -18,7 +18,8 @@ function now() {
  */
 
 function throttle(func, wait = 50, options) {
-  let timer, context, args, result;
+  let timer; let context; let args; let
+    result;
   // 之前的时间戳
   let previous = 0;
 
@@ -26,7 +27,7 @@ function throttle(func, wait = 50, options) {
   if (!options) options = {};
 
   // 定时器回调函数
-  const later = function() {
+  const later = function () {
     // 如果设置了 leading，就将 previous 设为 0
     // 用于下面函数的第一个 if 判断
     previous = options.leading === false ? 0 : now();
@@ -35,7 +36,7 @@ function throttle(func, wait = 50, options) {
     result = func.apply(context, args);
     if (!timer) context = args = null;
   };
-  return function(...params) {
+  return function (...params) {
     // 获得当前时间戳
     const now = now();
     // 首次进入前者肯定为 true
@@ -73,4 +74,3 @@ function throttle(func, wait = 50, options) {
     return result;
   };
 }
-

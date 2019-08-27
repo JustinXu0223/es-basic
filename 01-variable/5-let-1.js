@@ -1,8 +1,7 @@
-var tmp = new Date();
+const tmp = new Date();
 function f() {
-    console.log(tmp);
-    if (false) {
-        var tmp = "hello world";
-    }
-} f
-(); // undefined
+  console.log(tmp);
+  if (false) {
+    var tmp = 'hello world';
+  }
+} f(); // undefined

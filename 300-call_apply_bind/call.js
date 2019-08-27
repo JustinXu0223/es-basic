@@ -18,9 +18,9 @@ const obj = { a: 1, b: 2 };
 const o = {
   a: 1,
   b: 2,
-  add: function(c, d) {
-    return this.a + this.b + c + d
-  }
+  add(c, d) {
+    return this.a + this.b + c + d;
+  },
 };
 
 // console.log(o.add(3, 4));
@@ -32,26 +32,26 @@ const o = {
 // 所以我们使用js实现call方法的步骤可以分为：
 
 // 1. 将函数设为对象的属性
-  // o.fn = bar
+// o.fn = bar
 // 2. 执行该函数
-  // o.fn()
+// o.fn()
 // 3. 删除该函数
-  // delete o.fn
+// delete o.fn
 
 // ES3 call 实现
 Function.prototype.es3Call = function (context) {
-  var content = context || window;
+  const content = context || window;
   content.fn = this;
   // var arr = Array.prototype.slice.call(arguments, 1);
   // console.log(JSON.stringify(arr));
-  var args = [];
-  for (var i = 1, len = arguments.length ; i < len; i++) {
-    args.push('arguments[' + i + ']');
+  const args = [];
+  for (let i = 1, len = arguments.length; i < len; i++) {
+    args.push(`arguments[${i}]`);
   }
-  var result = eval('content.fn('+args+')');
+  const result = eval(`content.fn(${args})`);
   delete content.fn;
   return result;
-}
+};
 
 // console.error(add.es3Call(obj, 3, 4));
 // console.log(add.es3Call({ a: 3, b: 9 }, {xx: 1}, 4)); // 12[object Object]4
@@ -60,13 +60,13 @@ Function.prototype.es3Call = function (context) {
 Function.prototype.es6Call = function (context) {
   var context = context || window;
   context.fn = this;
-  var args = [];
-  for (var i = 1, len = arguments.length; i < len; i++) {
-    args.push('arguments[' + i + ']');
+  const args = [];
+  for (let i = 1, len = arguments.length; i < len; i++) {
+    args.push(`arguments[${i}]`);
   }
   const result = context.fn(...args);
   return result;
-}
+};
 
 console.error(add.es6Call(obj, 3, 4));
-console.log(add.es3Call({ a: 3, b: 9 }, {xx: 1}, 4)); // 12[object Object]4
+console.log(add.es3Call({ a: 3, b: 9 }, { xx: 1 }, 4)); // 12[object Object]4

@@ -1,6 +1,6 @@
 const x = 1;
 
-const f = (m) => m * 2;
+const f = m => m * 2;
 
 console.log(f(x + 5));
 

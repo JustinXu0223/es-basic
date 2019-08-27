@@ -1,5 +1,5 @@
 const x = 1;
-const f = (m) =>  m * 2;
+const f = m => m * 2;
 
 console.log(f(x + 5));
 
@@ -7,6 +7,6 @@ console.log(f(x + 5));
 
 const thunk = () => x + 5;
 
-const fn = (thunk) => thunk() * 2;
+const fn = thunk => thunk() * 2;
 
 console.log(fn(thunk));
