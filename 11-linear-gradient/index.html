@@ -8,32 +8,58 @@
       margin: 250px auto 0;
       width: 200px;
       height: 200px;
-      background: linear-gradient(to left, #999, #e4393c);
       cursor: pointer;
       position: relative;
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 20px;
+      border-radius: 50%;
+      overflow: hidden;
     }
 
-    .inner {
+    .box:before {
+      content: ' ';
       position: absolute;
+      z-index: -2;
       left: 0;
       top: 0;
       pointer-events: none;
-      width: 200px;
-      height: 200px;
+      width: 100%;
+      height: 100%;
       background: linear-gradient(to right, #999, #e4393c);
+    }
+
+    .box:after {
+      content: ' ';
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to left, #999, #e4393c);
       opacity: 0;
       transition: opacity linear .33s;
     }
 
-    .box:hover .inner {
+    .box:hover:after {
       opacity: 1;
     }
   </style>
-  <!-- 两个设置了渐变色的元素层叠后，通过过渡一个透明度的0到1的元素来实现渐变色渐入渐出 -->
+  <!--
+    通过after和before设置了渐变色的元素层叠后，
+    然后不设置容器的背景颜色，通过z-index来控制背景层级，将需要hover之前的背景
+    小于hover之后的背景，并且两个都小于0，使其不在容器内部元素上层，
+    通过过渡一个透明度的0到1控制hover之后元素，来实现渐变色渐入渐出
+   -->
 </head>
 <body>
   <div class="box">
-    <div class="inner"></div>
+    张三
   </div>
 </body>
 </html>
