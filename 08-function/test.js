@@ -1,5 +1,5 @@
-var nodeList = document.querySelectorAll('p');
-var arr = [...nodeList];
+const nodeList = document.querySelectorAll('p');
+const arr = [...nodeList];
 console.log(nodeList);
 console.log('------------');
 console.log(arr);

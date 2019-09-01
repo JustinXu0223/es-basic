@@ -6,11 +6,21 @@
  */
 import CryptoJS from 'crypto-js';
 // INIT
-const APP_KEY = '1p72smk2xwou7dytya';
+const APP_KEY = 'k49cv8esobmpvdx67u';
+const APP_SECRET = '7xs15slglcernpuuj9l8xtaxfdr99hxo';
 
-const APP_SECRET = 'mdeldqauyg4tj39z5yirardcvgyq8i4l';
-console.log(APP_SECRET.slice(0, 16));
-const APP_SECRET_KEY = CryptoJS.enc.Utf8.parse(APP_SECRET.slice(0, 16));
+// 将slice(0, 16)复杂化
+function getAppRealSecret() {
+  return APP_SECRET.split('').reverse().reduceRight((prev, curr, index) => {
+    if (APP_SECRET.length - index > 16) return prev;
+    prev += curr;
+    return prev;
+  }, '');
+}
+
+console.log('@APP_REAL_SECRET:', getAppRealSecret());
+const APP_DATA_SECRET_KEY = CryptoJS.enc.Utf8.parse(getAppRealSecret());
+const APP_SIGN_SECRET_KEY = CryptoJS.enc.Utf8.parse(APP_SECRET);
 
 const letterList = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'.split('');
 
@@ -32,7 +42,8 @@ function getSecretMap() {
     appKey: APP_KEY,
     nonce_str: getRandom(11),
     timestamp: parseInt(String(+new Date() / 1000), 10),
-    // timestamp: 1566207709.111111,
+    // nonce_str: 'FvK5uGviJYA',
+    // timestamp: 1566556700,
   };
   const result = Object.keys(map).sort().reduce((prev, curr) => {
     prev[curr] = map[curr];
@@ -40,27 +51,36 @@ function getSecretMap() {
   }, {});
   return {
     map,
-    stringSignTemp: JSON.stringify(result),
+    stringDataTemp: JSON.stringify(result),
+    stringSignTemp: `${Object.keys(result).map(key => `${key}=${result[key]}`).join('&')}&key=${APP_SECRET}`,
   };
 }
 
-export function encode(iv) {
-  const { map, stringSignTemp } = getSecretMap();
-  console.log('@stringSignTemp:', stringSignTemp);
-  const aesRes = CryptoJS.AES.encrypt(stringSignTemp, APP_SECRET_KEY, {
+export function encodeData(stringDataTemp, iv) {
+  const aesRes = CryptoJS.AES.encrypt(stringDataTemp, APP_DATA_SECRET_KEY, {
     iv: CryptoJS.enc.Utf8.parse(iv),
     mode: CryptoJS.mode.CBC,
     padding: CryptoJS.pad.Pkcs7,
   });
+  return aesRes.toString();
+}
+
+export function encodeSign(stringSignTemp) {
+  console.log('@stringSignTemp:', stringSignTemp);
+  return CryptoJS.HmacSHA256(stringSignTemp, APP_SIGN_SECRET_KEY).toString().toUpperCase();
+}
+
+export function encode(iv) {
+  const { map, stringDataTemp, stringSignTemp } = getSecretMap();
   return {
     ...map,
-    sign: CryptoJS.HmacSHA256(CryptoJS.SHA256(stringSignTemp), APP_SECRET_KEY).toString(),
-    data: aesRes.toString(),
+    sign: encodeSign(stringSignTemp),
+    data: encodeData(stringDataTemp, iv),
   };
 }
 
-export function decode(word, iv) {
-  const decrypt = CryptoJS.AES.decrypt(decodeURIComponent(word), APP_SECRET_KEY, {
+export function decodeData(word, iv) {
+  const decrypt = CryptoJS.AES.decrypt(word, APP_DATA_SECRET_KEY, {
     iv: CryptoJS.enc.Utf8.parse(iv),
     mode: CryptoJS.mode.CBC,
     padding: CryptoJS.pad.Pkcs7,
@@ -74,7 +94,7 @@ const result = encode(header['X-PEIV']);
 
 export function print() {
   console.log('@header:', header);
-  console.log('@header:', header);
-  console.log('@result:', result.data);
-  console.log('@decode:', decode(result.data, header['X-PEIV']));
+  // console.log('@result:', result.data);
+  // console.log('@decode:', decodeData(result.data, header['X-PEIV']));
+  console.log('@result:', result.sign);
 }

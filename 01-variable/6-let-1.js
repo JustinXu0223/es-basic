@@ -1,13 +1,13 @@
 function f1() {
-    let n = 5;
-    if (true) {
-        let n = 10;
-    }
-    console.log(n); // 5
+  const n = 5;
+  if (true) {
+    const n = 10;
+  }
+  console.log(n); // 5
 }
 f1();
 
-{{{{
-    let insane = 'Hello World';
-    {let insane = 'Hello World'}
-}}}};
+{ { { {
+  const insane = 'Hello World';
+  { const insane = 'Hello World'; }
+} } } }

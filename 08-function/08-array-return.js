@@ -2,9 +2,9 @@ const dateFields = [2017, 10, 1];
 const d = new Date(...dateFields);
 console.log(d);
 
-var str = "hello";
+const str = 'hello';
 // ES5 的处理方式
-var chars=str.split("");
+const chars = str.split('');
 console.log(chars);// [ 'h', 'e', 'l', 'l', 'o' ]
 
 // ES6 的处理方式

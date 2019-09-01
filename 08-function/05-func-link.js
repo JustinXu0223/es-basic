@@ -1,6 +1,6 @@
 // ES5的写法
-var arr1 = [0, 1, 2];
-var arr2 = [3, 4, 5];
+const arr1 = [0, 1, 2];
+const arr2 = [3, 4, 5];
 Array.prototype.push.apply(arr1, arr2);
 console.log(arr1); // [ 0, 1, 2, 3, 4, 5 ]
 
@@ -11,7 +11,7 @@ arr3.push(...arr4);
 console.log(arr3); // [ 0, 1, 2, 3, 4, 5 ]
 
 // ES5
-var data = new (Date.bind.apply(Date, [null, 2017, 10, 1]));
+const data = new (Date.bind.apply(Date, [null, 2017, 10, 1]))();
 console.log(data); // 2017-10-31T16:00:00.000Z
 
 // ES6

@@ -6,6 +6,6 @@ const [first1, ...rest1] = [];
 console.log(first1); // undefined
 console.log(rest1); // []
 
-const [first2, ...rest2] = ["foo"];
+const [first2, ...rest2] = ['foo'];
 console.log(first2);// "foo"
 console.log(rest2); // []

@@ -1,4 +1,4 @@
-let arr = [1, 2, 3];
+const arr = [1, 2, 3];
 
 console.log(arr.includes(3, 3)); // false
 console.log(arr.includes(3)); // true

@@ -88,9 +88,6 @@ function getTreePathList(list, value, {
 } = {}) {
   for (let i = 0; i < list.length; i += 1) {
     const { children = [], [equalKey]: name, [returnKey]: uid } = list[i];
-    if (children) {
-      delete list[i].children;
-    }
     const returnMap = (returnIndex || returnOnlyLast) ? {
       ...list[i],
       index: i,

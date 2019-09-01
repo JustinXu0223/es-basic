@@ -11,11 +11,11 @@
 // 先看一个使用bind方法的实例
 
 function foo(c, d) {
-  this.b = 100
-  console.log(this.a)
-  console.log(this.b)
-  console.log(c)
-  console.log(d)
+  this.b = 100;
+  console.log(this.a);
+  console.log(this.b);
+  console.log(c);
+  console.log(d);
 }
 // var func = foo.bind({a: 1}, '1st');
 // func('2nd'); // 1 100 1st 2nd
@@ -28,12 +28,12 @@ function foo(c, d) {
 // new func('4th'); //undefined 100 1st 4th
 
 Function.prototype.es3Bind = function (context) {
-  if (typeof this !== "function") throw new TypeError('what is trying to be bound is not callback');
-  var self = this;
-  var args = Array.prototype.slice.call(arguments, 1);
+  if (typeof this !== 'function') throw new TypeError('what is trying to be bound is not callback');
+  const self = this;
+  const args = Array.prototype.slice.call(arguments, 1);
   const fBound = function () {
     // 获取函数的参数
-    var bindArgs = Array.prototype.slice.call(arguments);
+    const bindArgs = Array.prototype.slice.call(arguments);
     // console.log(args);
     // console.log(bindArgs);
     // console.log(args.concat(bindArgs));
@@ -41,8 +41,8 @@ Function.prototype.es3Bind = function (context) {
     // 判断函数是作为构造函数还是普通函数
     // 构造函数this instanceof fNOP返回true，将绑定函数的this指向该实例，可以让实例获得来自绑定函数的值。
     // 当作为普通函数时，this 指向 window，此时结果为 false，将绑定函数的 this 指向 context
-    return self.apply(this instanceof fNOP ? this: context, args.concat(bindArgs));
-  }
+    return self.apply(this instanceof fNOP ? this : context, args.concat(bindArgs));
+  };
   // 创建空函数
   var fNOP = function () {};
   // fNOP函数的prototype为绑定函数的prototype
@@ -51,27 +51,25 @@ Function.prototype.es3Bind = function (context) {
   fBound.prototype = new fNOP();
   // 以上三句相当于Object.create(this.prototype)
   return fBound;
-}
+};
 
-var func = foo.es3Bind({a: 1}, '1st');
-func('2nd');  // 1 100 1st 2nd
-func.call({a: 2}, '3rd'); // 1 100 1st 3rd
-new func('4th');  //undefined 100 1st 4th
+var func = foo.es3Bind({ a: 1 }, '1st');
+func('2nd'); // 1 100 1st 2nd
+func.call({ a: 2 }, '3rd'); // 1 100 1st 3rd
+new func('4th'); // undefined 100 1st 4th
 
-Function.prototype.es6Bind = function(context, ...rest) {
+Function.prototype.es6Bind = function (context, ...rest) {
   if (typeof this !== 'function') throw new TypeError('invalid invoked!');
-  var self = this;
+  const self = this;
   return function F(...args) {
     if (this instanceof F) {
-      return new self(...rest, ...args)
+      return new self(...rest, ...args);
     }
-    return self.apply(context, rest.concat(args))
-  }
-}
+    return self.apply(context, rest.concat(args));
+  };
+};
 
-var func = foo.es6Bind({a: 1}, '1st');
+var func = foo.es6Bind({ a: 1 }, '1st');
 func('2nd');
-func.call({a: 2}, '3rd');
+func.call({ a: 2 }, '3rd');
 // new func('4th');
-
-
