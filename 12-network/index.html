@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>渐变和过渡效果</title>
+    <title>请求背景网络资源</title>
   <style>
     .box {
       margin: 250px auto 0;
@@ -29,7 +29,8 @@
       pointer-events: none;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to right, #999, #e4393c);
+      background: url("http://img1.imgtn.bdimg.com/it/u=551180330,2986440005&fm=26&gp=0.jpg") no-repeat;
+      background-size: 100%;
     }
 
     .box:after {
@@ -41,7 +42,8 @@
       pointer-events: none;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to left, #999, #e4393c);
+      background: url("http://img4.imgtn.bdimg.com/it/u=2519501909,294206455&fm=27&gp=0.jpg") no-repeat;
+      background-size: 100%;
       opacity: 0;
       transition: opacity linear .33s;
     }
@@ -51,7 +53,7 @@
     }
   </style>
   <!--
-    通过after和before设置了渐变色的元素层叠后，
+    通过after和before设置了背景元素层叠后，
     然后不设置容器的背景颜色，通过z-index来控制背景层级，将需要hover之前的背景
     小于hover之后的背景，并且两个都小于0，使其不在容器内部元素上层，
     通过过渡一个透明度的0到1控制hover之后元素，来实现渐变色渐入渐出
