@@ -28,10 +28,13 @@ import logo from '../assets/logo.svg';
 // import { Demo1, Demo2 } from './demo/demo';
 
 // utils
-import { print } from '../utils/sign';
+// import { print } from '../utils/sign';
 
 // style
 import './app.css';
+
+// my redux
+import './redux'
 
 class App extends React.Component {
   state = {};
@@ -54,10 +57,6 @@ class App extends React.Component {
   //     <List add={props.add} name={name} />
   //   );
   // };
-
-  componentDidMount() {
-    print();
-  }
 
   render() {
     return (
