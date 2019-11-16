@@ -18,4 +18,4 @@ export const rootReducers = combineReducers({
   demo,
 });
 
-console.log(combineReducers(rootReducers));
+console.log(rootReducers);
