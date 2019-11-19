@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>运营商劫持</title>
+  <!-- 防劫持 -->
+  <script shendun-eddy>
+      /**
+       * @note 防劫持代码
+       * @key MutationObserver 提供了监视对DOM树所做更改的能力
+       */
+      (function() {
+          try {
+              var srcFilterTags = ['script', 'iframe'];
+              // 域名白名单 可以加多个
+              var whiteList = [
+                  window.location.hostname,
+                  'unpkg.com',
+                  'cnzz.com',
+              ];
+              // 资源链接匹配规则，元素类型为正则表达式
+              var whiteListReg = [];
+
+              // 正则匹配
+              whiteList.forEach(function(wl) {
+                  // 匹配http开头的域名部分，元素实例会自行修正src中的反斜杠
+                  var wlReg = new RegExp('^https?:(//)?[^/]*?' + wl, 'i');
+                  whiteListReg.push(wlReg);
+              });
+              // 白名单助手
+              var inWhileList = function(addedNode) {
+                  // 例外规则
+                  if (
+                      addedNode.src === '' &&
+                      // shendun-eddy 是script的白名单标签
+                      (addedNode.getAttribute('shendun-eddy') !== null ||
+                          // iframe空src，html2canvas需要iframe做兼容性检测
+                          addedNode.tagName.toLowerCase() === 'iframe')
+                  ) {
+                      return true;
+                  }
+                  var isInWhiteList = false;
+
+                  whiteListReg.forEach(function(wlReg) {
+                      if (wlReg.test(addedNode.src)) {
+                          isInWhiteList = true;
+                          return false;
+                      }
+                  });
+
+                  return isInWhiteList;
+              };
+
+              // dom观察器
+              var mutationHandler = function(records) {
+                  records.forEach(function(record) {
+                      var addedNodes = [];
+                      // 如果src被动态修改，也要进行监管
+                      if (
+                          record.type.toLowerCase() === 'attributes' &&
+                          record.attributeName.toLowerCase() === 'src'
+                      ) {
+                          addedNodes.push(record.target);
+                      } else {
+                          addedNodes = Array.prototype.slice.call(record.addedNodes);
+                      }
+                      addedNodes.forEach(function(addedNode) {
+                          srcFilterTags.forEach(function(tagName) {
+                              // 标签匹配 白名单匹配
+                              if (addedNode.tagName === tagName.toUpperCase() && !inWhileList(addedNode)) {
+                                  addedNode.remove();
+                              }
+                          });
+                      });
+                  });
+              };
+
+              var MutationObserver =
+                  window.MutationObserver ||
+                  window.WebKitMutationObserver ||
+                  window.MozMutationObserver,
+                  observeMutationSupport = !!MutationObserver;
+
+              if (observeMutationSupport) {
+                  new MutationObserver(mutationHandler).observe(document.documentElement, {
+                      childList: true,
+                      subtree: true,
+                      // 监视src属性修改
+                      /**
+                       * android 4.4.2 需要声明 attributes
+                       * 不声明则attributeFilter则报异常 Uncaught SyntaxError: An invalid or illegal string was specified.
+                       */
+                      attributes: true,
+                      attributeFilter: ['src']
+                  });
+              }
+              var eleList = document.querySelectorAll('script');
+              var len = eleList.length;
+              for (var i = 0; i < len; i++) {
+                  if (!inWhileList(eleList[i])) {
+                      eleList[i].remove();
+                  }
+              }
+          } catch (error) {
+              console.error(error);
+          }
+          if (window.self !== window.top) {
+              alert(
+                  '脚本检测到存在劫持的风险,如页面不属于***或引导您到新的地址！请不予理会!',
+              );
+          }
+      })();
+  </script>
+</head>
+<body>
+
+</body>
+</html>
