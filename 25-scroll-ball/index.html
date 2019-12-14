@@ -30,10 +30,16 @@
     ul {
       overflow-x: scroll;
       overflow-y: hidden;
+      /* 解决ios卡顿 */
+      -webkit-overflow-scrolling: touch;
       height: 100%;
       list-style-type: none;
       display: flex;
       align-items: center;
+    }
+    /* 解决滚动条 */
+    ul::-webkit-scrollbar {
+      display: none;
     }
     li {
       width: 200px;
