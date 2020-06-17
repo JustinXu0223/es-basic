@@ -10,7 +10,7 @@ function currying(fn, i = 0, ...argList) {
     return fn.apply(null, argList)
   }
 }
-// const sum = (...args) => args.reduce((prev, curr) => prev + curr, 0);
+
 function sum(a, b, c, d) {// 函数可处理的参数个数为3
   return a + b + c + d;
 }
