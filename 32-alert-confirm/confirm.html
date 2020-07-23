@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm</title>
+</head>
+<body>
+ConfirmConfirmConfirmConfirm
+</body>
+<script>
+  window.confirm = function (message) {
+    const iframe = document.createElement("IFRAME");
+    iframe.style.display = "none";
+    iframe.setAttribute("src", 'data:text/plain,');
+    document.documentElement.appendChild(iframe);
+    const alertFrame = window.frames[0];
+    const result = alertFrame.window.confirm(message);
+    iframe.parentNode.removeChild(iframe);
+    return result;
+  };
+  confirm('成功')
+</script>
+</html>
