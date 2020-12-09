@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>background-image: 定位的起点默认是是padding的外边缘, 可以通过background-origin修改</title>
+  <style type="text/css">
+    .box {
+      width: 200px;
+      height: 200px;
+      border: 50px dotted black;
+
+      background-color: red;
+      background-image: url(img/2.jpg);
+      background-size: 100px 100px;
+      background-repeat: no-repeat;
+
+
+      padding: 50px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<h2>原图</h2>
+<div>
+  <img src="img/2.jpg" style="height: 100px ; width: 100px;" ?>
+</div>
+
+<h2>正常: border-origin: padding-box; border-clip: border-box; <br>
+  此时 background-color:显示所有; background-image显示所有
+</h2>
+<div class="box">
+  1111
+</div>
+<h2>border-clip: padding-box;<br>
+  background-color:裁剪了一部分; background-image 显示所有
+</h2>
+<div class="box" style="background-clip: padding-box;">
+  1111
+</div>
+
+<h2>border-clip: padding-box; background-origin: border-box;<br>
+  background-color:裁剪了一部分; background-image 显示一部分:
+</h2>
+<div class="box" style="background-clip: padding-box; background-origin: border-box;">
+  1111
+</div>
+
+<h2>border-clip: content-box; background-origin: border-box;<br>
+  background-color:裁剪了一部分; background-image 完全被裁剪掉了:
+</h2>
+<div class="box" style="background-clip: content-box; background-origin: border-box;">
+  1111
+</div>
+
+<h2>border-clip: content-box; background-origin: content-box;<br>
+  background-color:裁剪了一部分; background-image 显示所有:
+</h2>
+<div class="box" style="background-clip: content-box; background-origin: content-box;">
+  1111
+</div>
+</body>
+</html>

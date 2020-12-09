@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>背景</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, user-scalable=no"
+  />
+  <script src="./rem.js"></script>
+  <style type="text/css">
+    body {
+      padding: 0 1px;
+      background-image: url("./img/img_bg.jpg");
+      background-repeat: no-repeat;
+    }
+    .box {
+      background-image: url('./img/com_bar_middle_r8_1_night.png'),
+      url('./img/com_bar_middle_r8_3_night.png');
+
+      height: 180px;
+      background-size: 100% 18px, 100% 26px;
+      background-position: left 0 top 0, left 0 bottom -6px;
+      background-repeat: no-repeat, no-repeat;
+      position: relative;
+      margin: 0 auto;
+      padding: 1px;
+    }
+
+    .box::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      top: 18px;
+      right: 0;
+      bottom: 20px;
+      left: 0;
+      background-image: url('./img/com_bar_middle_r8_2_night.png');
+      background-size: 100% auto;
+      background-position: top left;
+      background-repeat: repeat-y;
+    }
+  </style>
+</head>
+<body>
+<h2>DEMO</h2>
+<div class="box">
+</div>
+</body>
+</html>
